@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+body.season-summer #header{
+	background: none;
+}
+body.season-summer #wrapper {
+    background-image: url('../images/season/summer-topbg.png');
+}
+body.season-summer #navi {
+    width: 800px;
+    padding-right: 200px;
+    z-index: 100;
+}
+body.season-summer #navi ul {
+    padding-left: 0;
+}
+body.season-summer #navi ul>li>a {
+	display: inline-block;
+	padding: 0 30px;
+}
+body.season-summer #navi ul>li>a>img {
+}
+body.season-summer #mtitle_inwrap{
+	background-image: url('../images/season/summer-mtitle_bg.jpg');
+}
+body.season-summer #header_fix .ico{
+	position: absolute;
+	right: 0;
+	bottom: -1px;
+	display: inline-block;
+	width: 230px;
+	height: 87px;
+	background-repeat: no-repeat;
+	background-image: url('../images/season/summer-ico.png');
+	background-position: 100% 100%;
+}
