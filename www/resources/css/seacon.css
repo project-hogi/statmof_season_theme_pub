@@ -1,5 +1,55 @@
 @CHARSET "UTF-8";
 
+.total_btn{
+	z-index: 131 !important;
+}
+#totalmenu_bg{
+	z-index: 130 !important;
+}
+
+/* Spring */
+body.season-spring #header{
+	background: none;
+}
+body.season-spring #wrapper {
+    background-image: url('../images/season/spring-topbg.png');
+}
+body.season-spring #navi {
+    width: 800px;
+    padding-right: 200px;
+    z-index: 100;
+}
+body.season-spring #navi ul {
+    padding-left: 0;
+}
+body.season-spring #navi ul>li>a {
+	display: inline-block;
+	padding: 0 30px;
+}
+body.season-spring #navi ul>li>a>img {
+}
+body.season-spring #mtitle_inwrap{
+	background-image: url('../images/season/spring-mtitle_bg.jpg');
+}
+body.season-spring #header_fix .ico{
+	position: absolute;
+	right: 0;
+	bottom: -4px;
+	display: inline-block;
+	width: 230px;
+	height: 87px;
+	background-repeat: no-repeat;
+	background-image: url('../images/season/spring-ico.png');
+	background-position: 100% 100%;
+}
+body.season-spring #topsearch{
+	background-image: url('../images/common/search_imgbg-spring.png');
+}
+body.season-spring ul.pagerContainer li a.active{
+	background-image: url("../images/popzone_circle_on_spring.png");
+}
+
+/* Summer */
 body.season-summer #header{
 	background: none;
 }
@@ -33,4 +83,10 @@ body.season-summer #header_fix .ico{
 	background-repeat: no-repeat;
 	background-image: url('../images/season/summer-ico.png');
 	background-position: 100% 100%;
+}
+body.season-summer #topsearch{
+	background-image: url('../images/common/search_imgbg-summer.png');
+}
+body.season-summer ul.pagerContainer li a.active{
+	background-image: url("../images/popzone_circle_on_summer.png");
 }

@@ -198,7 +198,7 @@ var word_list =[{"text":"수산물","weight":10,"link":{"href":"#"},"html":{"tit
 	</style>
 	<link type="text/css" rel="stylesheet" href="resources/css/seacon.css" />
 	<link type="text/css" rel="stylesheet" href="chrome-extension://eobejphpabbjeehffmbiecckpkggpbai/style.css"><script type="text/javascript" charset="utf-8" src="chrome-extension://eobejphpabbjeehffmbiecckpkggpbai/js/content-script/page_context.js"></script></head>
-	<body naver_screen_capture_injected="true" class="season-summer">
+	<body naver_screen_capture_injected="true" class="season-spring">
 	<h2>바로가기 서비스</h2>
 		<ul id="skip">
 			<li><a href="#header_wrap">메뉴 목차 바로가기</a></li>
@@ -216,9 +216,9 @@ $(document).ready(function(){
 		var img = $(this).find('img'); 
 		$('#totalmenu_bg').slideToggle('slow',function(){
 			if($('#totalmenu_bg').css('display')=='none'){
-				img.prop('src','/statPortal/resources/images/common/totalview_btn.png');
+				img.prop('src','/statPortal/resources/images/common/totalview_btn-spring.png');
 			}else{
-				img.prop('src','/statPortal/resources/images/common/totalclose_btn.png');
+				img.prop('src','/statPortal/resources/images/common/totalclose_btn-spring.png');
 			}
 		});
 	};
@@ -249,7 +249,7 @@ $(document).ready(function(){
 			<div id="header_fix">
 			<h1 id="logo"><a href="https://www.mof.go.kr/statPortal" target="_top"><img src="https://www.mof.go.kr/statPortal/resources/images/common/logo.png" alt="해양수산부 통계시스템"></a></h1>
 			<!-- 전체메뉴 시작 -->
-			<div class="total_btn" style="z-index: 14"><a href="#"><img src="https://www.mof.go.kr/statPortal/resources/images/common/totalview_btn.png" alt="전체메뉴보기"></a></div>
+			<div class="total_btn" style="z-index: 14"><a href="#"><img src="resources/images/common/totalview_btn-spring.png" alt="전체메뉴보기"></a></div>
 			<div id="totalmenu_bg" style="display:none;z-index: 13">
 				<div class="totalmenu1 totalmenu">
 					<p class="totalmenu_title"><a href="#">서비스안내</a></p>
@@ -344,7 +344,7 @@ $(document).ready(function(){
 							<input type="text" name="shText" id="search" value="검색어를 입력하세요." class="commontop_input" title="검색어를 입력하세요">
 						</span>
 					</li>
-					<li class="topsearchbtn"><img style="cursor: pointer;" src="https://www.mof.go.kr/statPortal/resources/images/common/search_btn.png" alt="검색"></li>
+					<li class="topsearchbtn"><img style="cursor: pointer;" src="resources/images/common/search_btn-spring.png" alt="검색"></li>
 				</ul>
 			</div>
 			</form>
@@ -377,7 +377,7 @@ $(document).ready(function(){
 				<!-- 서비스안내 -->   
 				<li id="navi1">
 					<a href="https://www.mof.go.kr/statPortal/info/intro.do">
-						<img src="resources/images/common/navi1.png" onmouseover="toggleImage(this, 'resources/images/common/navi1on.png')" onmouseout="toggleImage(this, 'resources/images/common/navi1.png')" alt="서비스안내">
+						<img src="resources/images/common/navi1-spring.png" onmouseover="toggleImage(this, 'resources/images/common/navi1on-spring.png')" onmouseout="toggleImage(this, 'resources/images/common/navi1-spring.png')" alt="서비스안내">
 					</a>
 					<ul class="navi1_2depth 2depth" style="display:none">
 						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/info/intro.do">해양수산통계소개</a></span></li>
@@ -392,7 +392,7 @@ $(document).ready(function(){
 				<!-- 통계조회 -->   
 				<li id="navi2">
 				   <a href="https://www.mof.go.kr/statPortal/cate/partStat.do">
-				   		<img src="resources/images/common/navi2.png" onmouseover="toggleImage(this, 'resources/images/common/navi2on.png')" onmouseout="toggleImage(this, 'resources/images/common/navi2.png')" alt="통계조회">
+				   		<img src="resources/images/common/navi2-spring.png" onmouseover="toggleImage(this, 'resources/images/common/navi2on-spring.png')" onmouseout="toggleImage(this, 'resources/images/common/navi2-spring.png')" alt="통계조회">
 				   </a>
 				   <ul class="navi2_2depth 2depth" style="display:none">
 						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/cate/partStat.do">분야별통계</a></span></li>
@@ -407,7 +407,7 @@ $(document).ready(function(){
 				<!-- 지표조회 -->    
 				<li id="navi3">
 				   <a href="https://www.mof.go.kr/statPortal/stat/listStatIndex.do">
-				   		<img src="resources/images/common/navi3.png" onmouseover="toggleImage(this, 'resources/images/common/navi3on.png')" onmouseout="toggleImage(this, 'resources/images/common/navi3.png')" alt="지표조회">
+				   		<img src="resources/images/common/navi3-spring.png" onmouseover="toggleImage(this, 'resources/images/common/navi3on-spring.png')" onmouseout="toggleImage(this, 'resources/images/common/navi3-spring.png')" alt="지표조회">
 				   </a>
 				   <ul class="navi3_2depth 2depth" style="display:none">
 						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/stat/listStatIndex.do">분야별지표</a></span></li>
@@ -419,7 +419,7 @@ $(document).ready(function(){
 				<!-- 통계정보 -->    
 				<li id="navi4">
 				   <a href="https://www.mof.go.kr/statPortal/bbs/publication/list.do">
-				   		<img src="resources/images/common/navi4.png" onmouseover="toggleImage(this, 'resources/images/common/navi4on.png')" onmouseout="toggleImage(this, 'resources/images/common/navi4.png')" alt="통계정보">
+				   		<img src="resources/images/common/navi4-spring.png" onmouseover="toggleImage(this, 'resources/images/common/navi4on-spring.png')" onmouseout="toggleImage(this, 'resources/images/common/navi4-spring.png')" alt="통계정보">
 				   </a>
 				   <ul class="navi4_2depth 2depth" style="display:none">
 						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/bbs/publication/list.do">간행물</a></span></li>
@@ -434,7 +434,7 @@ $(document).ready(function(){
 				<!-- 참여 -->    
 				<li id="navi5">
 				   <a href="https://www.mof.go.kr/statPortal/bbs/event/list.do">
-				   		<img src="resources/images/common/navi5.png" onmouseover="toggleImage(this, 'resources/images/common/navi5on.png')" onmouseout="toggleImage(this, 'resources/images/common/navi5.png')" alt="참여">
+				   		<img src="resources/images/common/navi5-spring.png" onmouseover="toggleImage(this, 'resources/images/common/navi5on-spring.png')" onmouseout="toggleImage(this, 'resources/images/common/navi5-spring.png')" alt="참여">
 				   </a>
 				   <ul class="navi5_2depth 2depth" style="display:none">
 						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/bbs/event/list.do">이벤트</a></span></li>
@@ -450,7 +450,7 @@ $(document).ready(function(){
 				
 				
 
-				   	<img src="resources/images/common/navi6.png" onmouseover="toggleImage(this, 'resources/images/common/navi6on.png')" onmouseout="toggleImage(this, 'resources/images/common/navi6.png')" alt="마이페이지">
+				   	<img src="resources/images/common/navi6-spring.png" onmouseover="toggleImage(this, 'resources/images/common/navi6on-spring.png')" onmouseout="toggleImage(this, 'resources/images/common/navi6-spring.png')" alt="마이페이지">
 				   </a>
 				   <ul class="navi6_2depth 2depth" style="display:none">
 				   
@@ -484,8 +484,8 @@ $(document).ready(function(){
 		<div class="mtab_area">
 			<ul class="mtab">
 				
-				<li id="tab2"><a href="https://www.mof.go.kr/statPortal/cate/recommdList.do"><img src="https://www.mof.go.kr/statPortal/resources/images/m_tab2on.png" alt="주요통계"></a></li>
-				<li id="tab3"><a href="https://www.mof.go.kr/statPortal/cate/popularList.do"><img src="https://www.mof.go.kr/statPortal/resources/images/m_tab3.png" alt="인기통계"></a></li>
+				<li id="tab2"><a href="https://www.mof.go.kr/statPortal/cate/recommdList.do"><img src="resources/images/m_tab2-springon.png" alt="주요통계"></a></li>
+				<li id="tab3"><a href="https://www.mof.go.kr/statPortal/cate/popularList.do"><img src="resources/images/m_tab3-spring.png" alt="인기통계"></a></li>
 			</ul>
 			
 			<ul id="list-tab2" class="mtab_list tab2" style="">
