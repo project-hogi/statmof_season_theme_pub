@@ -1,0 +1,815 @@
+<html lang="ko"><!--<![endif]--><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>해양수산부 통계시스템</title>
+		<link rel="shortcut icon" href="https://www.mof.go.kr/logo.ico?v=20160329" type="image/x-icon">    
+		<link rel="stylesheet" type="text/css" href="https://www.mof.go.kr/statPortal/resources/js/jquery/jquery-ui-1.11.1/jquery-ui.css">
+		<script type="text/javascript" src="https://www.mof.go.kr/statPortal/resources/js/jquery/jquery-1.11.1.min.js"></script><style type="text/css"></style>
+		<script type="text/javascript" src="https://www.mof.go.kr/statPortal/resources/js/jquery/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="https://www.mof.go.kr/statPortal/resources/js/portal.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://www.mof.go.kr/statPortal/resources/css/common.css">
+		
+
+		<link rel="stylesheet" type="text/css" href="https://www.mof.go.kr/statPortal/resources/js/jqcloud/jqcloud.css">
+		<script type="text/javascript" src="https://www.mof.go.kr/statPortal/resources/js/portal.js"></script>
+		<script type="text/javascript" src="https://www.mof.go.kr/statPortal/resources/js/jqcloud/jqcloud-1.0.4.min.js"></script>
+		<script type="text/javascript" src="https://www.mof.go.kr/statPortal/resources/js/jquery/bxslider/jquery.bxslider.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	openPopup();
+});
+
+
+ function fnStopPop(form){
+		
+	var f = form.id;
+	var ff = f.split('_')[1];
+	if(form.checked == true){
+		$('#linkStop_' + ff + '_div').hide();
+	}else{
+		$('#linkStop_' + ff + '_div').show();
+	}
+} 
+
+function setCookie(name, value, expiredays){
+	var date = new Date();
+	var iPeriod = Number(date.getDate());
+	expiredays = Number(expiredays);
+	date.setDate(iPeriod + expiredays);
+	document.cookie = name + "=" + escape(value) + "; expires=" + date.toUTCString();
+}
+
+function getCookie(cname){
+	var cookieInfo = "";
+	var dc = document.cookie;
+	var cookie = dc.split(";");
+	for(var i=0; i<cookie.length; i++){
+		var value = cookie[i].split("=");
+		if(value[0] == cname){
+			cookieInfo = unescape(value[1]);
+			return cookieInfo; 
+		}
+	}
+	return "";
+}
+ 
+ function closePopup(id){
+	var f = id.split('_')[1];
+	if($("#" + id).prop('checked')){
+		setCookie(id, 0, 1);
+	}
+	$('#linkStop_' + f + '_div').hide();
+ }
+ 
+ 
+  function openPopup(){
+	
+	if(document.cookie != ""){
+		var dc = document.cookie;
+		var cookie = dc.split(";");
+		for(var i=0; i<cookie.length; i++){
+			try{
+				var value = cookie[i].split("=");
+				if(value[0] != null && value[0] != undefined){
+					if(value[0].trim == undefined)$("#" + value[0] + "_div").removeClass("openPopup");
+					else $("#" + value[0].trim() + "_div").removeClass("openPopup");
+				}
+			} catch(e){}
+		}
+	}
+	
+	$("div.openPopup").show();
+ }
+
+var word_list =[{"text":"수산물","weight":10,"link":{"href":"#"},"html":{"title":"수산물"}},{"text":"어획량","weight":9.2,"link":{"href":"#"},"html":{"title":"어획량"}},{"text":"양식","weight":8.8,"link":{"href":"#"},"html":{"title":"양식"}},{"text":"생산량","weight":8.5,"link":{"href":"#"},"html":{"title":"생산량"}},{"text":"크루즈","weight":8.3,"link":{"href":"#"},"html":{"title":"크루즈"}},{"text":"물동량","weight":8.1,"link":{"href":"#"},"html":{"title":"물동량"}},{"text":"적조","weight":7.9,"link":{"href":"#"},"html":{"title":"적조"}},{"text":"낚시","weight":7.7,"link":{"href":"#"},"html":{"title":"낚시"}},{"text":"해수욕장","weight":7.6,"link":{"href":"#"},"html":{"title":"해수욕장"}},{"text":"내수면","weight":7.5,"link":{"href":"#"},"html":{"title":"내수면"}},{"text":"선박","weight":7.4,"link":{"href":"#"},"html":{"title":"선박"}},{"text":"수입","weight":7.3,"link":{"href":"#"},"html":{"title":"수입"}},{"text":"여객선","weight":7.2,"link":{"href":"#"},"html":{"title":"여객선"}},{"text":"어가","weight":7.1,"link":{"href":"#"},"html":{"title":"어가"}},{"text":"수온","weight":7.1,"link":{"href":"#"},"html":{"title":"수온"}},{"text":"컨테이너","weight":7,"link":{"href":"#"},"html":{"title":"컨테이너"}},{"text":"여객","weight":6.9,"link":{"href":"#"},"html":{"title":"여객"}},{"text":"레저","weight":6.9,"link":{"href":"#"},"html":{"title":"레저"}},{"text":"항만","weight":6.8,"link":{"href":"#"},"html":{"title":"항만"}},{"text":"해양사고","weight":6.7,"link":{"href":"#"},"html":{"title":"해양사고"}},{"text":"생산","weight":6.7,"link":{"href":"#"},"html":{"title":"생산"}},{"text":"어항","weight":6.6,"link":{"href":"#"},"html":{"title":"어항"}},{"text":"해안선","weight":6.6,"link":{"href":"#"},"html":{"title":"해안선"}},{"text":"어업생산","weight":6.5,"link":{"href":"#"},"html":{"title":"어업생산"}},{"text":"어촌계","weight":6.5,"link":{"href":"#"},"html":{"title":"어촌계"}},{"text":"어업","weight":6.5,"link":{"href":"#"},"html":{"title":"어업"}},{"text":"수출입","weight":6.4,"link":{"href":"#"},"html":{"title":"수출입"}},{"text":"도서","weight":6.4,"link":{"href":"#"},"html":{"title":"도서"}},{"text":"어선","weight":6.3,"link":{"href":"#"},"html":{"title":"어선"}},{"text":"요트","weight":6.3,"link":{"href":"#"},"html":{"title":"요트"}},{"text":"마리나","weight":6.3,"link":{"href":"#"},"html":{"title":"마리나"}},{"text":"수산자원","weight":6.2,"link":{"href":"#"},"html":{"title":"수산자원"}},{"text":"bdi","weight":6.2,"link":{"href":"#"},"html":{"title":"bdi"}},{"text":"어업권","weight":6.2,"link":{"href":"#"},"html":{"title":"어업권"}},{"text":"꽃게","weight":6.1,"link":{"href":"#"},"html":{"title":"꽃게"}},{"text":"피해","weight":6.1,"link":{"href":"#"},"html":{"title":"피해"}},{"text":"수산","weight":6.1,"link":{"href":"#"},"html":{"title":"수산"}},{"text":"넙치","weight":6.1,"link":{"href":"#"},"html":{"title":"넙치"}},{"text":"해양","weight":6,"link":{"href":"#"},"html":{"title":"해양"}},{"text":"양식장","weight":6,"link":{"href":"#"},"html":{"title":"양식장"}},{"text":"소비량","weight":6,"link":{"href":"#"},"html":{"title":"소비량"}},{"text":"사고","weight":5.9,"link":{"href":"#"},"html":{"title":"사고"}},{"text":"전복","weight":5.9,"link":{"href":"#"},"html":{"title":"전복"}},{"text":"고등어","weight":5.9,"link":{"href":"#"},"html":{"title":"고등어"}},{"text":"등대","weight":5.9,"link":{"href":"#"},"html":{"title":"등대"}},{"text":"항만하역","weight":5.8,"link":{"href":"#"},"html":{"title":"항만하역"}},{"text":"연어","weight":5.8,"link":{"href":"#"},"html":{"title":"연어"}},{"text":"해조류","weight":5.8,"link":{"href":"#"},"html":{"title":"해조류"}},{"text":"귀어","weight":5.8,"link":{"href":"#"},"html":{"title":"귀어"}}];
+      $(function() {
+        $('.textcloud').jQCloud(word_list,{
+        	removeOverflowing : true,
+        	width : 309,
+//        	height : 174,
+        	afterCloudRender : function(){
+		        $('.textcloud a').on('click',function(){
+		        	$('#search').val($(this).text());
+		        	$('#totalSearchForm').submit();
+		        });
+        	}
+        });
+
+/* 		        $('.textcloud a').on('click',function(){
+		        	$('#search').val($(this).text());
+		        	$('#totalSearchForm').submit(); */
+        
+        
+        var initTab = function(tabLi, selectedList, moreLink){
+			var $tabLi = $(tabLi); 
+			$tabLi.on('mouseover',function(){
+				$tabLi.each(function(){
+					var $findImg = $(this).find('img');
+					var src =  $findImg.prop('src');	
+					$findImg.prop('src',src.replace('on.png','.png'));
+				});
+				var $selectedImg = $(this).find('img'); 
+				$selectedImg.prop('src',$selectedImg.prop('src').replace('.png','on.png'));
+				$(moreLink).prop('href',$(this).find('a').prop('href'));
+				var $selectedList = $(selectedList);
+				$selectedList.hide();
+				$($selectedList.get($(this).index())).show();
+			});
+			
+			$(moreLink).prop('href',$($tabLi.get(0)).find('a').prop('href'));
+			
+			$(selectedList).hide();
+			$($(selectedList).get(0)).show();
+			var $findImg = $($tabLi.get(0)).find('img'); 
+			$findImg.prop('src',$findImg.prop('src').replace('on.png','.png'));
+			$findImg.prop('src',$findImg.prop('src').replace('.png','on.png'));
+			
+		};
+		initTab('.mtab_area .mtab li','.mtab_list');
+		initTab('.mindex_tabbg li','.mindex_listarea','.mindex_more a');
+		
+		
+		
+		$('.popupzone>ul').bxSlider({
+			controls : false,
+			pagerCustom : '.pagerContainer',
+			auto : true
+		});
+		
+		$('.banner>ul').bxSlider({
+			minSlides: 5,
+			maxSlides : 5,
+			slideWidth : 120,
+			slideMargin : 7 ,
+			nextSelector : '#control_right',
+			prevSelector : '#control_left',
+			auto : true,
+			autoControls : true,
+			autoControlsCombine : true,
+			autoControlsSelector : '#control_stop',
+			pause: 5000
+		});
+		
+		
+		
+        
+      });
+    </script>
+    
+    
+    	
+    <style>
+    	/* 팝업 페이저 */
+		ul.pagerContainer li a{
+			display:inline-block;
+			background-image: url("/statPortal/resources/images/popzone_circle.png");
+			line-height:20px;
+			width: 10px;
+			height:10px;
+			text-align:left;
+			vertical-align:baseline;
+			text-indent:-9999px;
+			background-repeat: no-repeat;
+		}
+		ul.pagerContainer li a.active{
+			background-image: url("/statPortal/resources/images/popzone_circle_on.png");
+			background-repeat: no-repeat;
+		}
+		
+		/* 배너 컨트롤러 */
+		div.banner_control ul li a{
+			display: inline-block;
+			line-height: 20px;
+			width: 16px;
+			height: 15px;
+			text-indent: -9999px
+		
+		}
+		
+		#control_right a{
+			background-image: url("/statPortal/resources/images/banner_right.png");
+		}
+		#control_left a{
+			background-image: url("/statPortal/resources/images/banner_left.png");
+		}
+		#control_stop a{
+			background-image: url("/statPortal/resources/images/banner_pause.png");
+		}
+	</style>
+	<link type="text/css" rel="stylesheet" href="resources/css/seacon.css" />
+	<link type="text/css" rel="stylesheet" href="chrome-extension://eobejphpabbjeehffmbiecckpkggpbai/style.css"><script type="text/javascript" charset="utf-8" src="chrome-extension://eobejphpabbjeehffmbiecckpkggpbai/js/content-script/page_context.js"></script></head>
+	<body naver_screen_capture_injected="true" class="season-winter">
+	<h2>바로가기 서비스</h2>
+		<ul id="skip">
+			<li><a href="#header_wrap">메뉴 목차 바로가기</a></li>
+			<li><a href="#mcon_wrap">본문 바로가기</a></li>
+			<li><a href="#footer_wrap">하단 바로가기</a></li>
+		</ul>
+	<hr>
+	<!-- wrapper 전체감싸주기 -->
+	<div id="wrapper">
+
+	
+<script type="text/javascript">
+$(document).ready(function(){
+	var slideToggle = function(){
+		var img = $(this).find('img'); 
+		$('#totalmenu_bg').slideToggle('slow',function(){
+			if($('#totalmenu_bg').css('display')=='none'){
+				img.prop('src','resources/images/common/totalview_btn-winter.png');
+			}else{
+				img.prop('src','resources/images/common/totalclose_btn-winter.png');
+			}
+		});
+	};
+	$('.total_btn').on('click',slideToggle);
+	
+	
+	var totalSearch = function(){
+		$('#search').on('focus',function(){
+				$(this).val('');
+		});
+		
+		$('#search').on('blur',function(){
+			if($(this).val()==''){
+				$(this).val('검색어를 입력하세요.');	
+			};
+		});
+		$('.topsearchbtn').on('click',function(){
+			$('#totalSearchForm').submit();
+		});
+	};
+	totalSearch();
+});
+</script>
+		<h2>메뉴 목차</h2>	
+		<div id="header_wrap">
+		<div id="header">
+			<!-- header 로고 및 상단네비게이션 영역 -->
+			<div id="header_fix">
+			<h1 id="logo"><a href="https://www.mof.go.kr/statPortal" target="_top"><img src="resources/images/common/logo-winter.png" alt="해양수산부 통계시스템"></a></h1>
+			<!-- 전체메뉴 시작 -->
+			<div class="total_btn" style="z-index: 14"><a href="#"><img src="resources/images/common/totalview_btn-winter.png" alt="전체메뉴보기"></a></div>
+			<div id="totalmenu_bg" style="display:none;z-index: 13">
+				<div class="totalmenu1 totalmenu">
+					<p class="totalmenu_title"><a href="#">서비스안내</a></p>
+					<ul class="t1_layout">
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/info/intro.do">해양수산통계소개</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/bbs/notice/list.do">공지사항</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/bbs/report/list.do">보도자료</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/bbs/faq/list.do">자주묻는질문</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/bbs/guide/list.do">이용안내</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/notice/siteList.do">관련사이트</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/notice/statSiteList.do">관련통계사이트</a></li>
+					</ul>
+				</div>
+				<div class="totalmenu2 totalmenu">
+					<p class="totalmenu_title"><a href="#">통계조회</a></p>
+					<ul class="t2_layout">
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/cate/partStat.do">분야별통계</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/cate/partDept.do">부서별통계</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/cate/recommdList.do">주요통계</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/cate/popularList.do">인기통계</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/notice/scheduleList.do">통계공표일정</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/notice/statDeptList.do">통계담당부서안내</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/cate/newStatList.do">최근수록자료</a></li>
+					</ul>
+				</div>
+				<div class="totalmenu3 totalmenu">
+					<p class="totalmenu_title"><a href="https://www.mof.go.kr/statPortal/stat/listStatIndex.do">지표조회</a></p>
+					<ul class="t3_layout">
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/stat/listStatIndex.do">분야별지표</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/stat/listImportantIndex.do">주요지표</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/stat/listPopularIndex.do">인기지표</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/stat/listNewIndex.do">최근수록지표</a></li>
+					</ul>
+				</div>
+				<div class="totalmenu4 totalmenu">
+					<p class="totalmenu_title"><a href="#">통계정보</a></p>
+					<ul class="t4_layout">
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/bbs/publication/list.do">간행물</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/stat/metaView.do">통계메타DB</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/stat/partDic.do">통계용어</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/bbs/legal/list.do">통계법령자료</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/bbs/statForm/list.do">통계서식정보</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/stat/statsSystem.do">통계기반정책평가제도</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/stat/statsQuality.do">품질진단안내</a></li>
+					</ul>
+				</div>
+				<div class="totalmenu5 totalmenu">
+					<p class="totalmenu_title"><a href="#">참여</a></p>
+					<ul class="t5_layout">
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/bbs/event/list.do">이벤트</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/mypage/writeRequest.do?imprvm_opinion_se=1">통계개선의견</a></li>
+						<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/mypage/writeRequest.do?imprvm_opinion_se=2">통계개발요청</a></li>
+												
+					</ul>
+				</div>
+				<div class="totalmenu6 totalmenu">
+					<p class="totalmenu_title"><a href="#">마이페이지</a></p>
+					<ul class="t6_layout">
+					
+					
+						
+							<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/common/login/loginForm.do">로그인</a></li>
+							<li class="totalmenu_bullet"><a href="https://www.mof.go.kr/statPortal/common/join/step1.do">회원가입</a></li>
+						
+					
+					
+										
+					</ul>
+				</div>				
+			</div><!--// totalmenu_bg -->
+			<!--// 전체메뉴 끝 -->
+
+			<!-- 상단 검색영역 -->
+			<form id="totalSearchForm" action="/statPortal/search/searchList.do" method="post">
+			<input type="hidden" name="shOrder" value="TITLE">
+			<input type="hidden" name="shDiv" value="A">
+			<div id="topsearch">
+				<ul>
+					<li class="topinput">
+						<select name="shKind" id="select" class="top_select">
+							<option value="">통합검색</option>
+							<option value="03100001">승인통계</option>
+							<option value="03100003">행정자료</option>
+							<option value="0310004">통계청</option>
+							<option value="0310005">국제통계</option>
+							<option value="0310006">북한통계</option>							
+							<option value="9100001">통계지표</option>
+							<option value="9200001">게시판</option>
+							<option value="9300001">통계용어</option>
+						</select>
+						<span>
+							<input type="text" name="shText" id="search" value="검색어를 입력하세요." class="commontop_input" title="검색어를 입력하세요">
+						</span>
+					</li>
+					<li class="topsearchbtn"><img style="cursor: pointer;" src="resources/images/common/search_btn-winter.png" alt="검색"></li>
+				</ul>
+			</div>
+			</form>
+			<ul id="top">
+			   <li><a href="https://www.mof.go.kr/statPortal" target="_top"><img src="https://www.mof.go.kr/statPortal/resources/images/common/top_home.png" alt="홈"></a> </li>
+		
+		  	   
+				   
+					   <li><a href="https://www.mof.go.kr/statPortal/common/login/loginForm.do"><img src="https://www.mof.go.kr/statPortal/resources/images/common/top_login.png" alt="로그인"></a> </li>
+				   
+				   
+				   
+					   	<li><a href="https://www.mof.go.kr/statPortal/common/join/step1.do"><img src="https://www.mof.go.kr/statPortal/resources/images/common/top_join.png" alt="회원가입"></a> </li>
+				   
+			   
+			   
+			   <li><a href="https://www.mof.go.kr/statPortal/main/sitemap.do"><img src="https://www.mof.go.kr/statPortal/resources/images/common/top_sitemap.png" alt="사이트맵"></a></li>		   
+			</ul>
+			<!-- 네비게이션 영역 시작 -->
+			<script type="text/javascript">
+			$(document).ready(function(){
+				$('#navi img').on('mouseover',function(){
+					$('.2depth').hide();
+					$('.'+$(this).parent().parent().prop('id')+'_2depth').show();
+				});
+			});
+			</script>
+			<div id="navi">
+			<ul>
+				<!-- 서비스안내 -->   
+				<li id="navi1">
+					<a href="https://www.mof.go.kr/statPortal/info/intro.do">
+						<img src="resources/images/common/navi1-winter.png" onmouseover="toggleImage(this, 'resources/images/common/navi1on-winter.png')" onmouseout="toggleImage(this, 'resources/images/common/navi1-winter.png')" alt="서비스안내">
+					</a>
+					<ul class="navi1_2depth 2depth" style="display:none">
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/info/intro.do">해양수산통계소개</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/bbs/notice/list.do">공지사항</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/bbs/report/list.do">보도자료</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/bbs/faq/list.do">자주묻는질문</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/bbs/guide/list.do">이용안내</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/notice/siteList.do">관련사이트</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/notice/statSiteList.do">관련통계사이트</a></span></li>
+					</ul>
+				</li>
+				<!-- 통계조회 -->   
+				<li id="navi2">
+				   <a href="https://www.mof.go.kr/statPortal/cate/partStat.do">
+				   		<img src="resources/images/common/navi2-winter.png" onmouseover="toggleImage(this, 'resources/images/common/navi2on-winter.png')" onmouseout="toggleImage(this, 'resources/images/common/navi2-winter.png')" alt="통계조회">
+				   </a>
+				   <ul class="navi2_2depth 2depth" style="display:none">
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/cate/partStat.do">분야별통계</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/cate/partDept.do">부서별통계</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/cate/recommdList.do">주요통계</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/cate/popularList.do">인기통계</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/notice/scheduleList.do">통계공표일정</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/notice/statDeptList.do">통계담당부서안내</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/cate/newStatList.do">최근수록자료</a></span></li>
+				   </ul>
+				</li>
+				<!-- 지표조회 -->    
+				<li id="navi3">
+				   <a href="https://www.mof.go.kr/statPortal/stat/listStatIndex.do">
+				   		<img src="resources/images/common/navi3-winter.png" onmouseover="toggleImage(this, 'resources/images/common/navi3on-winter.png')" onmouseout="toggleImage(this, 'resources/images/common/navi3-winter.png')" alt="지표조회">
+				   </a>
+				   <ul class="navi3_2depth 2depth" style="display:none">
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/stat/listStatIndex.do">분야별지표</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/stat/listImportantIndex.do">주요지표</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/stat/listPopularIndex.do">인기지표</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/stat/listNewIndex.do">최근수록지표</a></span></li>
+				   </ul>
+				</li>
+				<!-- 통계정보 -->    
+				<li id="navi4">
+				   <a href="https://www.mof.go.kr/statPortal/bbs/publication/list.do">
+				   		<img src="resources/images/common/navi4-winter.png" onmouseover="toggleImage(this, 'resources/images/common/navi4on-winter.png')" onmouseout="toggleImage(this, 'resources/images/common/navi4-winter.png')" alt="통계정보">
+				   </a>
+				   <ul class="navi4_2depth 2depth" style="display:none">
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/bbs/publication/list.do">간행물</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/stat/metaView.do">통계메타DB</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/stat/partDic.do">통계용어</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/bbs/legal/list.do">통계법령자료</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/bbs/statForm/list.do">통계서식정보</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/stat/statsSystem.do">통계기반정책평가제도</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/stat/statsQuality.do">품질진단안내</a></span></li>
+				   </ul>
+				</li>
+				<!-- 참여 -->    
+				<li id="navi5">
+				   <a href="https://www.mof.go.kr/statPortal/bbs/event/list.do">
+				   		<img src="resources/images/common/navi5-winter.png" onmouseover="toggleImage(this, 'resources/images/common/navi5on-winter.png')" onmouseout="toggleImage(this, 'resources/images/common/navi5-winter.png')" alt="참여">
+				   </a>
+				   <ul class="navi5_2depth 2depth" style="display:none">
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/bbs/event/list.do">이벤트</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/mypage/writeRequest.do?imprvm_opinion_se=1">통계개선의견</a></span></li>
+						<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/mypage/writeRequest.do?imprvm_opinion_se=2">통계개발요청</a></span></li>
+												
+				   </ul>
+				</li>
+				<!-- 마이페이지 -->    
+				<li id="navi6">
+				
+					<a href="https://www.mof.go.kr/statPortal/common/login/loginForm.do">
+				
+				
+
+				   	<img src="resources/images/common/navi6-winter.png" onmouseover="toggleImage(this, 'resources/images/common/navi6on-winter.png')" onmouseout="toggleImage(this, 'resources/images/common/navi6-winter.png')" alt="마이페이지">
+				   </a>
+				   <ul class="navi6_2depth 2depth" style="display:none">
+				   
+						
+							<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/common/login/loginForm.do">로그인</a></span></li>
+							<li><span class="bullet_2depth"><a href="https://www.mof.go.kr/statPortal/common/join/step1.do">회원가입</a></span></li>
+						
+					
+					
+					
+					
+					
+				   </ul>
+				</li>				
+			 </ul>
+			</div>
+			<!-- 네비게이션 영역 끝 -->
+				<span class="ico"></span>
+			</div>
+			<!-- //header -->
+		</div>
+	<!-- //헤더 영역 끝 -->
+	</div><!-- header_wrap-->
+
+
+	<div id="mtitle_wrap">
+	<div id="mtitle_inwrap" title="해양수산부와 함께하는 해양수산통계시스템 • 해양수산부에서는 이용자분들이 더욱 신속하고 정확한 통계정보를 이용하실 수 있도록 통계시스템을 지속적으로 관리, 발전시켜 나아가겠습니다.">
+	<!-- 메인타이틀 영역 시작 -->
+	<div id="mtitle_area">
+		<!-- 메인타이틀 탭 영역 -->
+		<div class="mtab_area">
+			<ul class="mtab">
+				
+				<li id="tab2"><a href="https://www.mof.go.kr/statPortal/cate/recommdList.do"><img src="resources/images/m_tab2-winteron.png" alt="주요통계"></a></li>
+				<li id="tab3"><a href="https://www.mof.go.kr/statPortal/cate/popularList.do"><img src="resources/images/m_tab3-winter.png" alt="인기통계"></a></li>
+			</ul>
+			
+			<ul id="list-tab2" class="mtab_list tab2" style="">
+				
+					<li><a href="#" onclick="javascript:callStat(700); return false;">1인당 국민소득</a><span class="mboard_date">통계청</span></li>
+				
+					<li><a href="#" onclick="javascript:callStat(748); return false;">DGPS 및 Loran-C 구축 현황</a><span class="mboard_date">항로표지과</span></li>
+				
+					<li><a href="#" onclick="javascript:callStat(751); return false;">IALA 가입국 및 이사국 현황</a><span class="mboard_date">항로표지과</span></li>
+				
+					<li><a href="#" onclick="javascript:callStat(659); return false;">IMO 의무분담금 현황</a><span class="mboard_date">해사안전정책과</span></li>
+				
+					<li><a href="#" onclick="javascript:callStat(745); return false;">IMO 협약 현황</a><span class="mboard_date">해사안전관리과</span></li>
+				
+			</ul>
+			<ul id="list-tab3" class="mtab_list tab3" style="display: none;">
+				
+					<li><a href="#" onclick="javascript:callStat(501); return false;">수산물 가공업통계</a><span class="mboard_date">수출가공진흥과</span></li>
+				
+					<li><a href="#" onclick="javascript:callStat(71); return false;">화물수송실적</a><span class="mboard_date">항만운영과</span></li>
+				
+					<li><a href="#" onclick="javascript:callStat(73); return false;">등록선박통계</a><span class="mboard_date">해사안전정책과</span></li>
+				
+					<li><a href="#" onclick="javascript:callStat(503); return false;">천해양식어업통계</a><span class="mboard_date">어촌양식정책과</span></li>
+				
+					<li><a href="#" onclick="javascript:callStat(500); return false;">등록어선통계</a><span class="mboard_date">어업정책과</span></li>
+				
+			</ul>
+		</div><!--// mtab_area -->		
+	</div><!-- mtitle_area -->
+
+	<!-- //메인타이틀 영역 끝 -->
+	</div><!-- mtitle_inwrap -->
+	</div><!-- mtitle_wrap -->
+	<div id="mcon_wrap">
+
+	<div id="mcon_inwrap">
+	<!-- 콘텐츠 전체 시작 -->
+	<div id="mcon_area">
+	
+
+
+		
+		<!-- 서비스 바로가기 영역 -->
+		<div id="mservice_boxarea">
+			<div class="mcon_title"><img src="https://www.mof.go.kr/statPortal/resources/images/m_title1.png" alt="서비스 바로가기"></div>
+				<ul class="mservice_img">
+					<li class="mservice_left"><a href="https://www.mof.go.kr/statPortal/cate/partStat.do"><img src="https://www.mof.go.kr/statPortal/resources/images/service_img1.png" onmouseover="toggleImage(this, '/statPortal/resources/images/service_img1on.png')" onmouseout="toggleImage(this, '/statPortal/resources/images/service_img1.png')" alt="분야별 통계"></a></li>
+					<li class="mservice_right"><a href="https://www.mof.go.kr/statPortal/cate/popularList.do"><img src="https://www.mof.go.kr/statPortal/resources/images/service_img2.png" onmouseover="toggleImage(this, '/statPortal/resources/images/service_img2on.png')" onmouseout="toggleImage(this, '/statPortal/resources/images/service_img2.png')" alt="인기통계"></a></li>
+					<li class="mservice_left"><a href="https://www.mof.go.kr/statPortal/bbs/publication/list.do"><img src="https://www.mof.go.kr/statPortal/resources/images/service_img3.png" onmouseover="toggleImage(this, '/statPortal/resources/images/service_img3on.png')" onmouseout="toggleImage(this, '/statPortal/resources/images/service_img3.png')" alt="간행물"></a></li>
+					<li class="mservice_right"><a href="https://www.mof.go.kr/statPortal/stat/partDic.do"><img src="https://www.mof.go.kr/statPortal/resources/images/service_img4.png" onmouseover="toggleImage(this, '/statPortal/resources/images/service_img4on.png')" onmouseout="toggleImage(this, '/statPortal/resources/images/service_img4.png')" alt="통계용어"></a></li>
+					<li class="mservice_left"><a href="https://www.mof.go.kr/statPortal/mypage/writeRequest.do?imprvm_opinion_se=1"><img src="https://www.mof.go.kr/statPortal/resources/images/service_img5.png" onmouseover="toggleImage(this, '/statPortal/resources/images/service_img5on.png')" onmouseout="toggleImage(this, '/statPortal/resources/images/service_img5.png')" alt="통계개선의견"></a></li>
+					<li class="mservice_right"><a href="https://www.mof.go.kr/statPortal/mypage/writeRequest.do?imprvm_opinion_se=2"><img src="https://www.mof.go.kr/statPortal/resources/images/service_img6.png" onmouseover="toggleImage(this, '/statPortal/resources/images/service_img6on.png')" onmouseout="toggleImage(this, '/statPortal/resources/images/service_img6.png')" alt="통계개발요청"></a></li>
+				</ul>
+			</div>
+		</div><!--// mservice_boxarea -->
+		
+		<!-- 주요지표/My지표 영역 -->
+		<div class="mindex_boxarea">			
+			<!-- 탭 및 내용 적용 영역 -->
+			<div class="mindex">
+			<div class="mindex_tabbg">
+				<ul>
+					<li><a href="https://www.mof.go.kr/statPortal/stat/listImportantIndex.do"><img src="https://www.mof.go.kr/statPortal/resources/images/m_title2on.png" alt="주요지표"></a></li>
+					
+				</ul>
+			</div><!--// mindex_tabbg -->
+			<div class="mindex_more"><a href="https://www.mof.go.kr/statPortal/stat/listImportantIndex.do"><img src="https://www.mof.go.kr/statPortal/resources/images/more_icon.png" alt="더보기"></a></div>
+			<div class="mindex_listarea" style="">
+				<ul>
+					
+						<li><a href="#" onclick="javascript:callStat(1000020, null, 'index'); return false;">국내여객 수송실적</a><span class="mindex_date">14,271천명, % ('14)</span></li>
+					
+						<li><a href="#" onclick="javascript:callStat(1000021, null, 'index'); return false;">국적선원 취업현황</a><span class="mindex_date">37,125명 ('14)</span></li>
+					
+						<li><a href="#" onclick="javascript:callStat(1000022, null, 'index'); return false;">남･북한 간 해상수송 물동량 현황</a><span class="mindex_date">2,545천톤 ('15)</span></li>
+					
+						<li><a href="#" onclick="javascript:callStat(1000010, null, 'index'); return false;">등록선박수 </a><span class="mindex_date">9,197척 ('15.11)</span></li>
+					
+				</ul> 						
+			</div><!--// mindex_listarea -->
+			
+			
+			</div><!--// mindex -->			
+		</div><!--// mindex_boxarea -->
+
+		<!-- 최근통계 영역 -->
+		<div class="mstats_boxarea">			
+			<!-- 탭 및 내용 적용 영역 -->
+			<div class="mstats">
+			<div class="mstats_title"><img src="https://www.mof.go.kr/statPortal/resources/images/m_title4.png" alt="최근통계"></div>
+			<div class="mstats_more"><a href="https://www.mof.go.kr/statPortal/cate/newStatList.do"><img src="https://www.mof.go.kr/statPortal/resources/images/more_icon.png" alt="더보기"></a></div>
+			<div class="mstats_listarea">
+				<ul>
+					
+						<li><a href="#" onclick="javascript:callStat(767); return false;">낚시산업 현황</a><span class="mindex_date">2016-06-13</span></li>
+					
+						<li><a href="#" onclick="javascript:callStat(546); return false;">구획어업 허가 현황</a><span class="mindex_date">2016-06-10</span></li>
+					
+						<li><a href="#" onclick="javascript:callStat(658); return false;">국립등대박물관 현황</a><span class="mindex_date">2016-06-10</span></li>
+					
+						<li><a href="#" onclick="javascript:callStat(659); return false;">IMO 의무분담금 현황</a><span class="mindex_date">2016-06-08</span></li>
+					
+						<li><a href="#" onclick="javascript:callStat(745); return false;">IMO 협약 현황</a><span class="mindex_date">2016-06-08</span></li>
+					
+				</ul> 						
+			</div><!--// mstats_listarea -->
+			</div><!--// mstats -->			
+		</div><!--// mstats_boxarea -->
+
+		<!-- 알림판 영역 -->
+		<div class="popupzone_boxarea">
+			<div class="mcon_title"><img src="https://www.mof.go.kr/statPortal/resources/images/m_title5.png" alt="알림판"></div>
+			<div class="popup_control">
+				<ul class="pagerContainer">
+					
+					<li><a data-slide-index="0" href="#" class="active">0&nbsp;</a></li>
+					
+					<li><a data-slide-index="1" href="#">1&nbsp;</a></li>
+					
+				</ul>
+			</div>
+			<div class="popupzone">
+				<div class="bx-wrapper" style="max-width: 100%;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 211px;"><ul style="width: 415%; position: relative; transition-duration: 0s; transform: translate3d(-309px, 0px, 0px);"><li class="222 bx-clone" style="float: left; list-style: none; position: relative; width: 309px;">
+						<a href="http://blog.naver.com/korfish01" target="_blank">
+							<img style="width: 301px;height: 202px;margin-top: 4px; margin-left: 4px;" src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=dmtFeUtaR3VFL1NwNlRRVlUzdE9uS1F0Yi9ueFIzV0N6a0NKMmk3N2J5OD0=" alt="어식백세
+백세건강! 우리수산물과 함께" title="어식백세
+백세건강! 우리수산물과 함께">
+						</a>
+					</li>
+					
+					<li class="221" style="float: left; list-style: none; position: relative; width: 309px;">
+						<a href="http://blog.naver.com/PostList.nhn?blogId=korfish01&amp;categoryNo=45" target="_blank">
+							<img style="width: 301px;height: 202px;margin-top: 4px; margin-left: 4px;" src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=c29abkZoTytSUnJYR28vVW5rTWJORE5aaXJmZDlBdDJOaHAyd1NSdTBLTT0=" alt="이달의 수산물" title="이달의 수산물">
+						</a>
+					</li>
+					
+					<li class="222" style="float: left; list-style: none; position: relative; width: 309px;">
+						<a href="http://blog.naver.com/korfish01" target="_blank">
+							<img style="width: 301px;height: 202px;margin-top: 4px; margin-left: 4px;" src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=dmtFeUtaR3VFL1NwNlRRVlUzdE9uS1F0Yi9ueFIzV0N6a0NKMmk3N2J5OD0=" alt="어식백세
+백세건강! 우리수산물과 함께" title="어식백세
+백세건강! 우리수산물과 함께">
+						</a>
+					</li>
+					
+				<li class="221 bx-clone" style="float: left; list-style: none; position: relative; width: 309px;">
+						<a href="http://blog.naver.com/PostList.nhn?blogId=korfish01&amp;categoryNo=45" target="_blank">
+							<img style="width: 301px;height: 202px;margin-top: 4px; margin-left: 4px;" src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=c29abkZoTytSUnJYR28vVW5rTWJORE5aaXJmZDlBdDJOaHAyd1NSdTBLTT0=" alt="이달의 수산물" title="이달의 수산물">
+						</a>
+					</li></ul></div><div class="bx-controls"></div></div>
+			</div>
+
+		</div><!--// popupzone_boxarea -->
+
+		<!-- 자주찾은 검색어 영역 -->
+		<div class="keyword_boxarea">
+			<div class="mcon_title"><img src="https://www.mof.go.kr/statPortal/resources/images/m_title6.png" alt="자주찾는검색어"></div>
+			<div class="textcloud jqcloud" style="width: 309px; height: 174px;">
+			<span title="수산물" id="l4cz_word_0" class="w10" style="position: absolute; left: 109px; top: 69px;"><a href="#">수산물</a></span><span title="어획량" id="l4cz_word_1" class="w8" style="position: absolute; left: 131.82px; top: 37.2313px;"><a href="#">어획량</a></span><span title="양식" id="l4cz_word_2" class="w7" style="position: absolute; left: 118.988px; top: 107.503px;"><a href="#">양식</a></span><span title="생산량" id="l4cz_word_3" class="w7" style="position: absolute; left: 171.993px; top: 108.777px;"><a href="#">생산량</a></span><span title="크루즈" id="l4cz_word_4" class="w6" style="position: absolute; left: 198.947px; top: 84.2582px;"><a href="#">크루즈</a></span><span title="물동량" id="l4cz_word_5" class="w6" style="position: absolute; left: 44.7277px; top: 70.8562px;"><a href="#">물동량</a></span><span title="적조" id="l4cz_word_6" class="w6" style="position: absolute; left: 56.9677px; top: 94.1657px;"><a href="#">적조</a></span><span title="낚시" id="l4cz_word_7" class="w5" style="position: absolute; left: 175.172px; top: 138.998px;"><a href="#">낚시</a></span><span title="해수욕장" id="l4cz_word_8" class="w5" style="position: absolute; left: 60.1893px; top: 31.9733px;"><a href="#">해수욕장</a></span><span title="내수면" id="l4cz_word_9" class="w5" style="position: absolute; left: 57.0694px; top: 120.765px;"><a href="#">내수면</a></span><span title="선박" id="l4cz_word_10" class="w4" style="position: absolute; left: 224.698px; top: 64.4146px;"><a href="#">선박</a></span><span title="수입" id="l4cz_word_11" class="w4" style="position: absolute; left: 128.545px; top: 133.19px;"><a href="#">수입</a></span><span title="여객선" id="l4cz_word_12" class="w4" style="position: absolute; left: 147.413px; top: 10.093px;"><a href="#">여객선</a></span><span title="수온" id="l4cz_word_13" class="w4" style="position: absolute; left: 209.527px; top: 27.3125px;"><a href="#">수온</a></span><span title="어가" id="l4cz_word_14" class="w4" style="position: absolute; left: 93.7638px; top: 12.2993px;"><a href="#">어가</a></span><span title="컨테이너" id="l4cz_word_15" class="w4" style="position: absolute; left: 239.034px; top: 124.447px;"><a href="#">컨테이너</a></span><span title="여객" id="l4cz_word_16" class="w3" style="position: absolute; left: 244.617px; top: 48.1525px;"><a href="#">여객</a></span><span title="레저" id="l4cz_word_17" class="w3" style="position: absolute; left: 212.139px; top: 136.404px;"><a href="#">레저</a></span><span title="항만" id="l4cz_word_18" class="w3" style="position: absolute; left: 264.542px; top: 86.7684px;"><a href="#">항만</a></span><span title="해양사고" id="l4cz_word_19" class="w3" style="position: absolute; left: 38.6314px; top: 54.434px;"><a href="#">해양사고</a></span><span title="생산" id="l4cz_word_20" class="w3" style="position: absolute; left: 9.76342px; top: 75.1583px;"><a href="#">생산</a></span><span title="어항" id="l4cz_word_21" class="w3" style="position: absolute; left: 266.334px; top: 64.754px;"><a href="#">어항</a></span><span title="해안선" id="l4cz_word_22" class="w3" style="position: absolute; left: 200.712px; top: 8.21946px;"><a href="#">해안선</a></span><span title="어업" id="l4cz_word_25" class="w3" style="position: absolute; left: 255.751px; top: 105.919px;"><a href="#">어업</a></span><span title="도서" id="l4cz_word_27" class="w2" style="position: absolute; left: 109.402px; top: 151.541px;"><a href="#">도서</a></span><span title="어선" id="l4cz_word_28" class="w2" style="position: absolute; left: 2.37017px; top: 108.018px;"><a href="#">어선</a></span><span title="요트" id="l4cz_word_29" class="w2" style="position: absolute; left: 28.8338px; top: 107.696px;"><a href="#">요트</a></span><span title="bdi" id="l4cz_word_32" class="w2" style="position: absolute; left: 202.064px; top: 63.2231px;"><a href="#">bdi</a></span><span title="꽃게" id="l4cz_word_34" class="w2" style="position: absolute; left: 35.9558px; top: 37.0739px;"><a href="#">꽃게</a></span><span title="피해" id="l4cz_word_35" class="w2" style="position: absolute; left: 212.857px; top: 156.476px;"><a href="#">피해</a></span><span title="넙치" id="l4cz_word_37" class="w2" style="position: absolute; left: 54.0314px; top: 144.916px;"><a href="#">넙치</a></span><span title="해양" id="l4cz_word_38" class="w1" style="position: absolute; left: 82.0616px; top: 141.865px;"><a href="#">해양</a></span><span title="소비량" id="l4cz_word_39" class="w1" style="position: absolute; left: 203.172px; top: 46.363px;"><a href="#">소비량</a></span><span title="양식장" id="l4cz_word_40" class="w1" style="position: absolute; left: 54.6518px; top: 7.78281px;"><a href="#">양식장</a></span><span title="사고" id="l4cz_word_41" class="w1" style="position: absolute; left: 147.809px; top: 153.483px;"><a href="#">사고</a></span><span title="전복" id="l4cz_word_42" class="w1" style="position: absolute; left: 30.607px; top: 132.241px;"><a href="#">전복</a></span><span title="고등어" id="l4cz_word_43" class="w1" style="position: absolute; left: 251.454px; top: 31.8906px;"><a href="#">고등어</a></span><span title="연어" id="l4cz_word_46" class="w1" style="position: absolute; left: 14.595px; top: 61.9104px;"><a href="#">연어</a></span><span title="해조류" id="l4cz_word_47" class="w1" style="position: absolute; left: 35.7211px; top: 18.6674px;"><a href="#">해조류</a></span><span title="귀어" id="l4cz_word_48" class="w1" style="position: absolute; left: 234.693px; top: 110.014px;"><a href="#">귀어</a></span></div>
+		</div><!--// keyword_boxarea -->
+
+
+
+		
+		<!-- 관련기관 배너모음 영역 -->
+		<div class="banner_boxarea">
+
+			<div class="mcon_title"><img src="https://www.mof.go.kr/statPortal/resources/images/m_title7.png" alt="관련기관 배너모음"></div>
+			<div class="banner_control">
+				<ul>
+					<li id="control_left" title="좌측이동"><a class="bx-prev" href="">Prev</a></li>
+					<li id="control_stop" title="일시정지"><div class="bx-controls-auto"><div class="bx-controls-auto-item"><a class="bx-stop" href="">Stop</a></div></div></li>
+					<li id="control_right" title="우측이동"><a class="bx-next" href="">Next</a></li>
+				</ul>
+			</div>
+			<div class="banner">
+				<div class="bx-wrapper" style="max-width: 628px;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 50px;"><ul style="width: 1415%; position: relative; transition-duration: 0s; transform: translate3d(-635px, 0px, 0px);"><li id="8" class="banner_term bx-clone" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.nfqs.go.kr/2013/index.asp" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=dklzVXU4K2k2dTdtUjN1eUg5ejJHOUpzdTR5THA1bkJzL09OZ3k2V29qMD0=" alt="국립수산물 품질관리원" title="국립수산물 품질관리원" style="width: 120px;height:50px"></a></li><li id="9" class="banner_term bx-clone" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.fips.go.kr/" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=RXI0cGIrVXFLeXZPeFpFUkZib1hkeTRIN1pVV0pFVjBwVWI2UG00dmtuQT0=" alt="수산정보포탈" title="수산정보포탈" style="width: 120px;height:50px"></a></li><li id="10" class="banner_term bx-clone" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.gicoms.go.kr/" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=YjhxN0tHaGo2V0d2M0RpNEszbVF4TUxJVE83djkwaDcyVERpNU5oOE1zdz0=" alt="해양안전종합정보시스템" title="해양안전종합정보시스템" style="width: 120px;height:50px"></a></li><li id="11" class="banner_term bx-clone" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://kosis.kr" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=NHA2YXNHbFZxNUtyNGVsTTV4UU1aS0Erd1VwQUFaRzF3ZjRJQWsrWWRTMD0=" alt="코시스 국가통계포털" title="코시스 국가통계포털" style="width: 120px;height:50px"></a></li><li id="12" class="banner_term bx-clone" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.koem.or.kr/" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=b1lMWldrNnVIYVhzMElXdVROZm1KRjNjL3hIWU90WUhZNGwwenl1ODdqbz0=" alt="해양환경 관리공단" title="해양환경 관리공단" style="width: 120px;height:50px"></a></li>
+					
+					<li id="1" class="banner_term" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.sejong.go.kr/" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=MDhHY2JZWFVKTFlTU05NRGUySko3cm1jTWZFT0VUZmNaKzZiNzJGQThQVT0=" alt="세종특별자치시" title="세종특별자치시" style="width: 120px;height:50px"></a></li>
+					
+					<li id="2" class="banner_term" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.saemangeum.go.kr/" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=cWlhNXdtWU5UeW1zMU56ODdDTVhIVXR6bjEySFJ3QTFyb2ltc0ExWGdkOD0=" alt="새만금개발청" title="새만금개발청" style="width: 120px;height:50px"></a></li>
+					
+					<li id="3" class="banner_term" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.nfrdi.re.kr" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=emJMYkVYTWFvZzRtQ0hHK0JLY2E2eldFNFloeCt4K1Z6aVpSM09NdytTQT0=" alt="국립수산과학원" title="국립수산과학원" style="width: 120px;height:50px"></a></li>
+					
+					<li id="4" class="banner_term" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.tife.or.kr" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=VVhzN2o4d3lpbE5xZW9qQ01tbzZMb3orWWh0YWZJcHIrM0UxM29wYlBmRT0=" alt="통영국제해양수산박람회" title="통영국제해양수산박람회" style="width: 120px;height:50px"></a></li>
+					
+					<li id="5" class="banner_term" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.marenqc.or.kr" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=VU1EVE1sTE5lWVgwaEpoa2ZiTHJ0Z29yOTM0TGMxcnN5ZWc5NkU5aUhYYz0=" alt="KOEM 해양환경관리공단 해양환경자료 정도관리시스템" title="KOEM 해양환경관리공단 해양환경자료 정도관리시스템" style="width: 120px;height:50px"></a></li>
+					
+					<li id="6" class="banner_term" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.spidc.go.kr/" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=UExsTTcvUFQvZzRtdkNJNUJBKzFhRjF1VFJzUENhN3loeXNPUVBsZUk4ST0=" alt="해운항만물류정보센터" title="해운항만물류정보센터" style="width: 120px;height:50px"></a></li>
+					
+					<li id="7" class="banner_term" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.meis.go.kr/" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=bUMxTW95bjJWLzZDN3NRY05kYzhnZ2d6M2dtWFFxU29kNis5THhYb0g4RT0=" alt="국가해양환경정보통합시스템" title="국가해양환경정보통합시스템" style="width: 120px;height:50px"></a></li>
+					
+					<li id="8" class="banner_term" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.nfqs.go.kr/2013/index.asp" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=dklzVXU4K2k2dTdtUjN1eUg5ejJHOUpzdTR5THA1bkJzL09OZ3k2V29qMD0=" alt="국립수산물 품질관리원" title="국립수산물 품질관리원" style="width: 120px;height:50px"></a></li>
+					
+					<li id="9" class="banner_term" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.fips.go.kr/" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=RXI0cGIrVXFLeXZPeFpFUkZib1hkeTRIN1pVV0pFVjBwVWI2UG00dmtuQT0=" alt="수산정보포탈" title="수산정보포탈" style="width: 120px;height:50px"></a></li>
+					
+					<li id="10" class="banner_term" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.gicoms.go.kr/" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=YjhxN0tHaGo2V0d2M0RpNEszbVF4TUxJVE83djkwaDcyVERpNU5oOE1zdz0=" alt="해양안전종합정보시스템" title="해양안전종합정보시스템" style="width: 120px;height:50px"></a></li>
+					
+					<li id="11" class="banner_term" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://kosis.kr" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=NHA2YXNHbFZxNUtyNGVsTTV4UU1aS0Erd1VwQUFaRzF3ZjRJQWsrWWRTMD0=" alt="코시스 국가통계포털" title="코시스 국가통계포털" style="width: 120px;height:50px"></a></li>
+					
+					<li id="12" class="banner_term" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.koem.or.kr/" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=b1lMWldrNnVIYVhzMElXdVROZm1KRjNjL3hIWU90WUhZNGwwenl1ODdqbz0=" alt="해양환경 관리공단" title="해양환경 관리공단" style="width: 120px;height:50px"></a></li>
+					
+				<li id="1" class="banner_term bx-clone" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.sejong.go.kr/" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=MDhHY2JZWFVKTFlTU05NRGUySko3cm1jTWZFT0VUZmNaKzZiNzJGQThQVT0=" alt="세종특별자치시" title="세종특별자치시" style="width: 120px;height:50px"></a></li><li id="2" class="banner_term bx-clone" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.saemangeum.go.kr/" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=cWlhNXdtWU5UeW1zMU56ODdDTVhIVXR6bjEySFJ3QTFyb2ltc0ExWGdkOD0=" alt="새만금개발청" title="새만금개발청" style="width: 120px;height:50px"></a></li><li id="3" class="banner_term bx-clone" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.nfrdi.re.kr" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=emJMYkVYTWFvZzRtQ0hHK0JLY2E2eldFNFloeCt4K1Z6aVpSM09NdytTQT0=" alt="국립수산과학원" title="국립수산과학원" style="width: 120px;height:50px"></a></li><li id="4" class="banner_term bx-clone" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.tife.or.kr" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=VVhzN2o4d3lpbE5xZW9qQ01tbzZMb3orWWh0YWZJcHIrM0UxM29wYlBmRT0=" alt="통영국제해양수산박람회" title="통영국제해양수산박람회" style="width: 120px;height:50px"></a></li><li id="5" class="banner_term bx-clone" style="float: left; list-style: none; position: relative; width: 111px; margin-right: 7px;"><a href="http://www.marenqc.or.kr" target="_blank"><img src="https://www.mof.go.kr/statPortal/main/searchFileInfo.do?id=VU1EVE1sTE5lWVgwaEpoa2ZiTHJ0Z29yOTM0TGMxcnN5ZWc5NkU5aUhYYz0=" alt="KOEM 해양환경관리공단 해양환경자료 정도관리시스템" title="KOEM 해양환경관리공단 해양환경자료 정도관리시스템" style="width: 120px;height:50px"></a></li></ul></div><div class="bx-controls bx-has-pager"><div class="bx-pager bx-default-pager"><div class="bx-pager-item"><a href="" data-slide-index="0" class="bx-pager-link active">1</a></div><div class="bx-pager-item"><a href="" data-slide-index="1" class="bx-pager-link">2</a></div><div class="bx-pager-item"><a href="" data-slide-index="2" class="bx-pager-link">3</a></div></div></div></div>
+			</div>
+			
+		</div><!--// banner_boxarea -->
+
+
+		<!-- 관련사이트/패밀리사이트 영역 -->
+		<div class="relation_boxarea">
+			<div class="relation_left">
+				<div class="relation_title">관련사이트</div>
+				<ul>
+					<li class="relation_bullet"><a href="http://kosis.kr" target="_blank">KOSIS</a></li>
+					<li class="relation_bullet"><a href="http://www.index.go.kr" target="_blank">e-나라지표</a></li>
+				</ul>
+			</div><!--// relation_left -->
+			<div class="relation_right">
+				<div class="relation_title">패밀리사이트</div>
+				<ul class="relation_list">
+					<li class="relation_bullet"><a href="http://www.mof.go.kr" target="_blank">해양수산부</a></li>
+					<li class="relation_bullet"><a href="http://maritime.hs.kr" target="_blank">부산해사고등학교</a></li>
+					<li class="relation_bullet"><a href="http://yeosu.mof.go.kr" target="_blank">여수지방해양항만청</a></li>
+					<li class="relation_bullet"><a href="http://pohang.mof.go.kr" target="_blank">포항해양항만청</a></li>
+				</ul>
+				<ul class="relation_list">
+					<li class="relation_bullet"><a href="http://www.nfqs.go.kr" target="_blank">국립수산물품질관리원</a></li>
+					<li class="relation_bullet"><a href="http://www.inm.hs.kr" target="_blank">인천해사고등학교</a></li>
+					<li class="relation_bullet"><a href="http://masan.mof.go.kr">마산지방해양항만청</a></li>
+					<li class="relation_bullet"><a href="http://pyeongtaek.mof.go.kr" target="_blank">평택해양항만청</a></li>
+				</ul>
+				<ul class="relation_list">
+					<li class="relation_bullet"><a href="http://www.khoa.go.kr" target="_blank">국립해양조사원</a></li>
+					<li class="relation_bullet"><a href="http://www.ofhi.go.kr" target="_blank">해양수산인재개발원</a></li>
+					<li class="relation_bullet"><a href="http://donghae.mof.go.kr" target="_blank">동해지방해양항만청</a></li>
+					<li class="relation_bullet"><a href="http://ulsan.mof.go.kr" target="_blank">울산해양항만청</a></li>
+				</ul>
+				<ul class="relation_list">
+					<li class="relation_bullet"><a href="http://eastship.mof.go.kr" target="_blank">동해어업관리단</a></li>
+					<li class="relation_bullet"><a href="http://portbusan.go.kr" target="_blank">부산지방해양항만청</a></li>
+					<li class="relation_bullet"><a href="http://gunsan.mof.go.kr" target="_blank">군산지방해양항만청</a></li>
+					<li class="relation_bullet"><a href="http://daesan.mof.go.kr" target="_blank">대산지방해양항만청</a></li>
+				</ul>
+				<ul class="relation_list">
+					<li class="relation_bullet"><a href="http://westship.mof.go.kr" target="_blank">서해어업관리단</a></li>
+					<li class="relation_bullet"><a href="http://www.portincheon.go.kr" target="_blank">인천지방해양항만청</a></li>
+					<li class="relation_bullet"><a href="http://mokpo.mof.go.kr" target="_blank">목포지방해양항만청</a></li>
+					<li class="relation_bullet"><a href="http://www.kmst.go.kr" target="_blank">중앙해양안전심판원</a></li>
+				</ul>
+			</div><!--// relation_left -->
+		</div><!--// relation_boxarea -->
+
+	</div><!--// mcon_area -->
+
+	<!-- 콘텐츠 전체 끝 -->
+	</div><!-- mcon_inwrap -->
+	</div><!-- mcon_wrap-->
+
+		
+	<!-- 풋터 시작 -->
+	
+<hr>
+	<h2>바닥글</h2>
+	<div id="footer_wrap">
+	<div id="footer_inwrap">
+	<div id="footer_bg">
+		<div id="footer_linkbg">
+			<ul id="footer_left">
+				<li> | <span class="footer_left1"><a href="#">개인정보처리방침</a></span>  | <span class="footer_left1"><a href="https://www.mof.go.kr/statMatrix/Common/binary/Silverlight5.zip">뷰어다운로드</a></span> | <span class="footer_left1"><a href="#">홈페이지 이용약관</a></span> | <span class="footer_left1"><a href="https://www.mof.go.kr/statPortal/bbs/guide/list.do">이용안내</a></span> | </li>
+			</ul>				
+		</div><!--// footer_linkbg -->
+		<div id="copyright">
+			<ul>
+				<li>30110 세종특별자치시 다솜2로 94 정부세종청사 5동. 해양수산부 <span>정보화담당관실 044-200-5185</span></li>
+				<li>COPYRIGHT ⓒ 2014 BY MINISTRY of OCEANS AND FISHERIES. ALL RIGHTS RESERVED.</li>
+			</ul>
+		</div><!--// copyright -->
+	</div><!--// footer_bg -->
+	</div><!-- footer_inwrap -->
+	</div><!-- footer_wrap -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		var showNavi = function(){
+			var leftTitle =$('.left_title').prop('title'); 
+			$('#navi img').each(function(){
+				if(leftTitle == $(this).prop('alt')){
+					var id =$(this).parent().parent().prop('id'); 
+					$('.'+id+'_2depth').show();
+					$(this).prop('src','/statPortal/resources/images/common/'+id+'on.png');
+				}
+			});
+		};
+		showNavi();
+		
+		$('.subleft li').each(function(){
+			if($(this).text()==$('.current').html()){
+				$(this).removeClass('leftbg_2depth').addClass('leftbg_2depth_on');
+			}
+		});
+		
+		
+	});
+	
+	$(function(){
+		$("div.cont_area").bind("resize",function(){
+			var height = Math.max($("div.cont_area").outerHeight(), $("div.left_area").outerHeight());
+			$("div#sconbg_area").css({height:height});
+		});
+		$("div.cont_area").trigger("resize");
+
+	});
+	
+	function toggleImage(ele, strSrc){
+	    ele.src = strSrc;
+	}
+</script>
+
+	<!-- 풋터 끝 -->
+
+
+	<!-- 팝업 공지사항 시작 -->
+	
+	
+	<!-- 팝업 공지사항 종료 -->	
+
+	
+<script aria-hidden="true" type="application/x-lastpass" id="hiddenlpsubmitdiv" style="display: none;"></script><script>try{(function() { for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){ var lastpass_f = document.forms[lastpass_iter]; if(typeof(lastpass_f.lpsubmitorig2)=="undefined"){ lastpass_f.lpsubmitorig2 = lastpass_f.submit; if (typeof(lastpass_f.lpsubmitorig2)=='object'){ continue;}lastpass_f.submit = function(){ var form=this; var customEvent = document.createEvent("Event"); customEvent.initEvent("lpCustomEvent", true, true); var d = document.getElementById("hiddenlpsubmitdiv"); if (d) {for(var i = 0; i < document.forms.length; i++){ if(document.forms[i]==form){ if (typeof(d.innerText) != 'undefined') { d.innerText=i.toString(); } else { d.textContent=i.toString(); } } } d.dispatchEvent(customEvent); }form.lpsubmitorig2(); } } }})()}catch(e){}</script></body></html>
