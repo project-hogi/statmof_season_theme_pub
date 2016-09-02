@@ -147,6 +147,61 @@ body.season-fall ul.pagerContainer li a.active{
 }
 
 
+/* fall22 */
+body.season-fall2 #totalmenu_bg{
+	background-image: url(../images/common/total_bg-fall.png);
+}
+body.season-fall2 .totalmenu_title{
+	background-color: #eeab18;
+}
+body.season-fall2 #header{
+	background: none;
+}
+body.season-fall2 #wrapper {
+    background-image: url('../images/season/fall-topbg.png');
+}
+body.season-fall2 #navi {
+    width: 800px;
+    padding-right: 200px;
+    z-index: 100;
+}
+body.season-fall2 #navi ul {
+    padding-left: 0;
+}
+body.season-fall2 .navi4_2depth{
+    background-color: rgba(255,255,255,0.7);
+}
+body.season-fall2 #navi ul>li>a {
+	display: inline-block;
+	padding: 0 30px;
+}
+body.season-fall2 #navi ul>li>a>img {
+}
+body.season-fall2 #navi ul li ul li span a {
+	color: #333;
+}
+body.season-fall2 #mtitle_inwrap{
+	background-image: url('../images/season/fall2-mtitle_bg.jpg');
+}
+body.season-fall2 #header_fix .ico{
+	position: absolute;
+	right: 0;
+	bottom: -4px;
+	display: inline-block;
+	width: 230px;
+	height: 87px;
+	background-repeat: no-repeat;
+	background-image: url('../images/season/fall2-ico.png');
+	background-position: 100% 100%;
+}
+body.season-fall2 #topsearch{
+	background-image: url('../images/common/search_imgbg-fall.png');
+}
+body.season-fall2 ul.pagerContainer li a.active{
+	background-image: url("../images/popzone_circle_on_fall.png");
+}
+
+
 /* winter */
 body.season-winter #totalmenu_bg{
 	background-image: url(../images/common/total_bg-winter.png);
